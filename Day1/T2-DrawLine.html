@@ -1,0 +1,74 @@
+
+  <!-- ? latest version html5 -->
+  <!DOCTYPE html>
+  <!-- ? root element / DOM ==> language-->
+  <html lang="en">
+    <head>
+      <!-- ? encoding  -->
+      <meta charset="UTF-8" />
+      <!-- ? latest version ==> edge -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!-- ? responsive -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <!-- ~ can i use website -->
+      <title>Document</title>
+      <script>
+        window.MathJax = {
+          MathML: { extensions: ["mml3.js", "content-mathml.js"] },
+        };
+      </script>
+      <style>
+        
+      </style>
+      
+    </head>
+    <body> 
+      
+        <canvas width="600" height="500" style="border:1px solid green" id="can"></canvas>
+
+          
+          
+            
+      <script>
+         var can = document.getElementById("can");
+         var x=100,y=100;
+    var ctx = can.getContext("2d");
+    ctx.beginPath();
+    ctx.moveTo(10,10);
+    ctx.lineTo(x,y);
+    ctx.strokeStyle = "red";
+    ctx.stroke();
+  
+    function sleep(milliseconds) {  
+      return new Promise(resolve => setTimeout(resolve, milliseconds));  
+   }  
+   async function fun() {  
+    while(x<600 || y<500){
+        await sleep(500); 
+        x+=10;
+        y+=10;
+        ctx.lineTo(x,y);
+        ctx.stroke();
+        if(x>=600 || y>=500){
+        alert("animation end")
+        }
+        }
+   }  
+   fun();  
+    ctx.closePath();
+    
+   
+   
+     
+       
+  
+   
+          
+        
+     
+        
+      
+      </script>
+    </body>
+  </html>
+  

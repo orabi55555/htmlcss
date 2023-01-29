@@ -1,0 +1,116 @@
+<!-- ? latest version html5 -->
+<!DOCTYPE html>
+<!-- ? root element / DOM ==> language-->
+<html lang="en">
+  <head>
+    <!-- ? encoding  -->
+    <meta charset="UTF-8" />
+    <!-- ? latest version ==> edge -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- ? responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ~ can i use website -->
+    <title>Document</title>
+    <script>
+      window.MathJax = {
+        MathML: { extensions: ["mml3.js", "content-mathml.js"] },
+      };
+    </script>
+    
+  </head>
+  <body>
+    
+ 
+    <video
+      src="frozen.mp4"
+      width="370"
+      poster="frozen.jpg"
+      id="vid"
+    ></video>
+    <br>
+    <input type="range" name="" id="vidRange" min="0" max="300" step="10" value="0"  style="width: 300px;"/>
+    <span id="current">0:00 </span>
+        <span > / </span>
+        <span id="original">0:00 </span><br> 
+    <button id="play">play</button>
+    <button id="stop">stop</button>
+    <button id="before"> &lt;&lt; </button>
+    <button id="beforeMin"> &lt;</button>
+    <button id="afterMin"> &gt; </button>
+    <button id="after"> &gt;&gt; </button>
+    
+    <input type="range" name="" id="muteRange" min="0" max="10" step="1" value="5"  style="width: 100px;"/>
+    <button id="mute"> Mute </button>
+    <br>
+    <label>Speed</label>
+    <input type="range" id="speedRange" min="0.25" max="2" step="0.1" value="1"  style="width: 100px;"/>
+    
+    
+    <script>
+    
+      // video part
+      var vid = document.querySelector("#vid"),
+      vidRange=document.querySelector("#vidRange"),
+      play=document.querySelector("#play"),
+      stop=document.querySelector("#stop"),
+      before=document.querySelector("#before"),
+      beforeMin=document.querySelector("#beforeMin"),
+      after=document.querySelector("#after"),
+      afterMin=document.querySelector("#afterMin"),
+      muteRange=document.querySelector("#muteRange"),
+      mute=document.querySelector("#mute"),
+      speedRange=document.querySelector("#speedRange");
+
+
+      vid.addEventListener("timeupdate", function () {
+        vidRange.value=vid.currentTime/vid.duration;
+      });
+    //   vidRange.addEventListener("chage",function(e){
+    //     vid.currentTime=e.currentTarget.value;
+    //   });
+
+        play.addEventListener('click',function(){
+            vid.play();
+        });
+        stop.addEventListener('click',function(){
+            vid.pause();
+        });
+        before.addEventListener("click", function () {
+        vid.currentTime=0;
+        vidRange.value=0;
+      });
+      beforeMin.addEventListener("click", function () {
+        vid.currentTime=vid.currentTime-10;
+        vidRange.value=vidRange.value-10;
+      });
+      after.addEventListener("click", function () {
+        vid.currentTime=vid.duration;
+        vidRange.value=vid.duration;
+      });
+      afterMin.addEventListener("click", function () {
+        vid.currentTime=vid.currentTime+10;
+        vidRange.value=vidRange.value+10;
+      });
+      
+      muteRange.addEventListener("change", function (e) {
+        vid.volume=e.currentTarget.value/100;
+      });
+      mute.addEventListener("click",function(){
+        vid.volume=0;
+        muteRange.value=0;
+      });
+      speedRange.addEventListener("change",function(){
+        vid.playbackRate = speedRange.value;
+      });
+  
+  vid.addEventListener("timeupdate", function(){
+                VidRange.value = vid.currentTime;
+                document.getElementById("current").innerText= parseFloat(vid.currentTime/60).toFixed(2)
+                document.getElementById("original").innerText= parseFloat(vid.duration/60).toFixed(2)
+            });
+
+      
+    
+    </script>
+  </body>
+</html>

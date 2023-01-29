@@ -1,0 +1,53 @@
+<!-- ? latest version html5 -->
+<!DOCTYPE html>
+<!-- ? root element / DOM ==> language-->
+<html lang="en">
+  <head>
+    <!-- ? encoding  -->
+    <meta charset="UTF-8" />
+    <!-- ? latest version ==> edge -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- ? responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ~ can i use website -->
+    <title>Document</title>
+    <script>
+      window.MathJax = {
+        MathML: { extensions: ["mml3.js", "content-mathml.js"] },
+      };
+    </script>
+    
+  </head>
+  <body>
+    <label>&nbsp; Red</label>
+    <input type="range"  id="redr" min="0" max="255"  value="0"  style="width: 100px;"/>
+    <br>
+    <label>Green</label>
+    <input type="range" id="greenr" min="0" max="255"  value="0"  style="width: 100px;"/>
+    <br>
+    <label>&nbsp; Blue</label>
+    <input type="range" id="bluer" min="0" max="255"  value="0"  style="width: 100px;"/>  
+    <h2 id="txt">Change the 3 Color Ranges above and observe my color Change</h2>
+    <script>
+   
+     
+
+   function changeColor(){
+   let red=document.getElementById("redr").value,
+     green=document.getElementById("greenr").value,
+     blue=document.getElementById("bluer").value;
+    let color= 'rgb(' + red + ',' + green + ',' + blue +')';
+    document.getElementById("txt").style.color= color;
+}
+document.getElementById('redr').addEventListener('input',changeColor);
+document.getElementById('greenr').addEventListener('input',changeColor);
+document.getElementById('bluer').addEventListener('input',changeColor);
+
+        
+      
+   
+      
+    
+    </script>
+  </body>
+</html>
