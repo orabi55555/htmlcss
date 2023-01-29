@@ -28,10 +28,11 @@
       id="vid"
     ></video>
     <br>
-    <input type="range" name="" id="vidRange" min="0" max="300" step="10" value="0"  style="width: 300px;"/>
-    <span id="current">0:00 </span>
-        <span > / </span>
-        <span id="original">0:00 </span><br> 
+    <input type="range" name="" id="vidRange" min="0" max="100" step="1" value="0"  style="width: 300px;"/>
+   <span id="remainingTime">0:00</span> / 
+    <span id="totalTime">0:00</span>
+    <br>
+
     <button id="play">play</button>
     <button id="stop">stop</button>
     <button id="before"> &lt;&lt; </button>
@@ -39,7 +40,7 @@
     <button id="afterMin"> &gt; </button>
     <button id="after"> &gt;&gt; </button>
     
-    <input type="range" name="" id="muteRange" min="0" max="10" step="1" value="5"  style="width: 100px;"/>
+    <input type="range" name="" id="muteRange" min="0" max="10" step="1" value="10"  style="width: 100px;"/>
     <button id="mute"> Mute </button>
     <br>
     <label>Speed</label>
@@ -49,21 +50,25 @@
     <script>
     
       // video part
-      var vid = document.querySelector("#vid"),
-      vidRange=document.querySelector("#vidRange"),
-      play=document.querySelector("#play"),
-      stop=document.querySelector("#stop"),
-      before=document.querySelector("#before"),
-      beforeMin=document.querySelector("#beforeMin"),
-      after=document.querySelector("#after"),
-      afterMin=document.querySelector("#afterMin"),
-      muteRange=document.querySelector("#muteRange"),
-      mute=document.querySelector("#mute"),
-      speedRange=document.querySelector("#speedRange");
+      var vid = document.getElementById("vid"),
+      vidRange=document.getElementById("vidRange"),
+      play=document.getElementById("play"),
+      stop=document.getElementById("stop"),
+      before=document.getElementById("before"),
+      beforeMin=document.getElementById("beforeMin"),
+      after=document.getElementById("after"),
+      afterMin=document.getElementById("afterMin"),
+      muteRange=document.getElementById("muteRange"),
+      mute=document.getElementById("mute"),
+      speedRange=document.getElementById("speedRange"),  
+ remainingTime = document.getElementById("remainingTime"),
+ totalTime = document.getElementById("totalTime");
 
 
       vid.addEventListener("timeupdate", function () {
-        vidRange.value=vid.currentTime/vid.duration;
+        vidRange.value=vid.currentTime;
+        remainingTime.innerHTML=parseFloat(vid.currentTime/60).toFixed(2);
+        totalTime.innerHTML=parseFloat(vid.duration/60).toFixed(2);
       });
     //   vidRange.addEventListener("chage",function(e){
     //     vid.currentTime=e.currentTarget.value;
@@ -78,18 +83,22 @@
         before.addEventListener("click", function () {
         vid.currentTime=0;
         vidRange.value=0;
+        remainingTime.innerHTML=parseFloat(vid.currentTime/60).toFixed(2);
       });
       beforeMin.addEventListener("click", function () {
-        vid.currentTime=vid.currentTime-10;
-        vidRange.value=vidRange.value-10;
+        vid.currentTime=vid.currentTime-5;
+        vidRange.value=vidRange.value-5;
+        remainingTime.innerHTML=parseFloat(vid.currentTime/60).toFixed(2);
       });
       after.addEventListener("click", function () {
         vid.currentTime=vid.duration;
         vidRange.value=vid.duration;
+        remainingTime.innerHTML=parseFloat(vid.currentTime/60).toFixed(2);
       });
       afterMin.addEventListener("click", function () {
-        vid.currentTime=vid.currentTime+10;
-        vidRange.value=vidRange.value+10;
+        vid.currentTime=vid.currentTime+5;
+        vidRange.value=vidRange.value+5;
+        remainingTime.innerHTML=parseFloat(vid.currentTime/60).toFixed(2);
       });
       
       muteRange.addEventListener("change", function (e) {
@@ -102,6 +111,14 @@
       speedRange.addEventListener("change",function(){
         vid.playbackRate = speedRange.value;
       });
+      
+vidRange.addEventListener(
+  "change",
+  function () {
+    video.currentTime = this.value;
+  },
+  false
+);
   
   vid.addEventListener("timeupdate", function(){
                 VidRange.value = vid.currentTime;

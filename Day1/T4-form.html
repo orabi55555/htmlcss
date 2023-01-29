@@ -6,76 +6,79 @@
     <meta name="viewport" content="width=V, initial-scale=1.0">
     <title>Web Forms validation</title>
     <style>
-        form
-        {
-            border: 2px solid rgb(143, 141, 142);
-            padding: 5px; 
-            height: 250px; 
-        }
-        button,p{ margin-left: 10px;}
-        input{
-            height: 30px;
-            width: 270px;
-            display: block;
-            margin: 10px;
-            font-size: 20px;
-        }
-        input::placeholder {
-        color: rgb(196, 202, 202);
-        font-size: 20px;
-        padding:3%;
-      }
-      
-      input:valid
-      {
-        border: 2px solid green;
-      }
-      input:valid::after
-      {
-       display:none;
-      }
-      
-      input:invalid {
-        border: 2px solid rgb(224, 54, 54);
-        
-      }
-      input[type="email"]::after{
+       
+
+  form{
+border: 3px solid black;
+padding : 0px 5%;
+
+}
+  /* Full-width inputs */
+  input[type=text], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid red;
+ display: inline-block;
     
-       content:"The required email adress may not include any special character other '@'signs.";
-       
-      }
-      input[type="text"]::after
-      {
-       content:"The required user name may only be a collection of alphabitical characters.";
-      }
-      input:focus {
-        border: 2px solid rgb(0, 11, 128);
-       
-        outline: none;
-      }
+  }
+  
+  /* btn style */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+margin-left:90px;
+margin-bottom:40px;
+    width: 90%;
+  }
+button:hover{
+opacity: 0.8;
+color:black;
+}
+ 
+.validation{
+    font-size: 12px;
+    opacity: 0.5;
+    color: red;
+}  
+input[type=text]:invalid, input[type=email]:invalid {
+    border-color: red;
+}
+
+input[type=text]:valid + .validation, input[type=email]:valid +.validation {
+    display: none;
+}
+
+input[type=text]:valid, input[type=email]:valid {
+    border-color: #04AA6D;
+}
+
     </style>
 </head>
 <body>
     
     <form action="#">
         <h1> Change Email Address</h1>
-    <input type="text"
-           pattern="[A-Za-z]{5}" required 
-           autocomplete="off"
-           placeholder="User name"
-           name="name" 
-           id="name" 
+        <div >
+            
+            <input type="text" 
+            placeholder="Enter Username" 
+            name="uname" 
+            pattern="[A-Za-z]{5}" required>
+            <span class="validation">The username can be only alphanetic characters and more than 5 char</span>
+          </div>
+       <div >
+        
+            <input type="email"
+             placeholder="Enter New Email" 
+             name="email" required>
+            <span class="validation"> Email not include any special char except @ </span>
+        
+            <button type="submit">Login</button>
+          </div>
 
-    />
-    
-    <input type="email"
-           name="email"
-           autocomplete="off"
-           placeholder="Email"
-            required 
-    />
-    
-    <button>Change</button>
    </form>
 </body>
 </html>
